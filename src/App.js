@@ -1,7 +1,6 @@
 import React from "react";
-import { BrowserRouter, Route, Link } from "react-router-dom";
- 
-import './App.css';
+import { BrowserRouter, Route, Link , NavLink} from "react-router-dom";
+ import './App.css';
 
 class App extends React.Component {
  
@@ -11,16 +10,16 @@ class App extends React.Component {
         <div>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <NavLink activeStyle={{color: 'red'}} to="/">Home</NavLink>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <Link activeStyle={{color: 'red'}} to="/about">About</Link>
             </li>
             <li>
               <Link to="/admin">Admin</Link>
             </li>
             <li>
-              <Link to="/washer">Washer</Link>
+              <Link to="/carwasher">CarWasher</Link>
             </li>
              <li>
               <Link to="/CarWashBooking">CarWashBooking</Link>
@@ -33,7 +32,7 @@ class App extends React.Component {
             <Route exact path="/" component={Home} />
             <Route path="/about" component={About} />
             <Route path="/admin" component={Admin} />
-            <Route path="/washer" component={Washer} />
+            <Route path="/carwasher" component={CarWasher} />
              <Route path="/CarWashBooking" component={CarWashBooking} />
           
           </div>
@@ -64,11 +63,12 @@ class About  extends React.Component {
     );
   }
 }
-class Washer  extends React.Component {
+class CarWasher  extends React.Component {
   render() {
     return (
       <div>
         <h2>Washer</h2>
+        <Content />
       </div>
     );
   }
@@ -253,5 +253,78 @@ class OrderManaament extends React.Component {
   }
 }
 
+class Content extends React.Component {
+  constructor(props) {
+    super(props);
+  
+    this.state = {
+      data: [
+        {
+          "id": 1,
+          "firstName": "Raj" ,
+          "lastName": "Kappor",
+          "email": "raj@gmail.com",
+          "phoneNumber": "9999999",
+          "vehicleNumber": "111130"
+        },
+        {
+          "id": 2,
+           "firstName": "Raj" ,
+          "lastName": "Kappor",
+          "email": "raj@gmail.com",
+          "phoneNumber": "9999999",
+          "vehicleNumber": "111130"
+        },
+        {
+          "id": 3,
+          "firstName": "Raj" ,
+          "lastName": "Kappor",
+          "email": "raj@gmail.com",
+          "phoneNumber": "9999999",
+          "vehicleNumber": "111130"
+        }
+      ]
+    };
+  }
+  render() {
+    return (
+    <div>
+      <p className="App-intro">
+         <table border="1" >
+          <thead>
+            <th> 
+              <td>Id</td>
+              <td>FirstName</td>
+              <td>LastName</td>
+              <td>Email</td>
+              <td>Phone Number</td>
+              <td>Vehicle Number</td>
+              <td>Accept/Reject</td>
+            </th>
+          </thead>
+          <tbody>
+            {this.state.data.map((person, i) => <TableRow key={i} data={person}/> )}
+          </tbody>
+        </table>
+      </p>
+      </div>
+    );
+  }
+}
 
+class TableRow extends React.Component {
+  render() {
+    return (
+
+      <tr>
+        <td>{this.props.data.id}</td>
+        <td>{this.props.data.firstName}</td>
+        <td>{this.props.data.lastName}</td>
+        <td>{this.props.data.email}</td>
+        <td>{this.props.data.phoneNumber}</td>
+        <td>{this.props.data.vehicleNumber}</td>
+      </tr>
+    );
+  }
+}
 export default App;
